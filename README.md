@@ -1,6 +1,4 @@
-# carpark-client
-
-TO-DO List
+# TO-DO List
 
 - create all layouts
 - add all view classes
