@@ -14,6 +14,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -29,10 +31,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Gets the MapView from the XML layout and creates it
         mapView = v.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-
-
         mapView.getMapAsync(this);
-
 
         return v;
     }
@@ -48,19 +47,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
         }
-       /*
-       //in old Api Needs to call MapsInitializer before doing any CameraUpdateFactory call
-        try {
-            MapsInitializer.initialize(this.getActivity());
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }
-       */
 
-        // Updates the location and zoom of the MapView
-        /*CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
-        map.animateCamera(cameraUpdate);*/
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(43.1, -87.9)));
+
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+            @Override
+            public void onMapClick(LatLng arg){
+                ((MainActivity) getActivity()).ShowView(getView().findViewById(R.id.toolbar3));
+            }
+        });
+
+        map.addMarker(new MarkerOptions().position(new LatLng(40.1,80.2)).title("Hello"));
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
+            @Override
+            public boolean onMarkerClick(Marker marker){
+                return true;
+            }
+        });
 
     }
 
