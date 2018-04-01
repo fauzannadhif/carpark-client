@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">CarparkApp</string>
     <string name="title_activity_main"></string>
-    <string name="search">Search</string>
+    <string name="search_hint">Search Car Park</string>
+    <string name="app_label">CarparkApp</string>
+    <string name="search_title">Enter Search</string>
+    <string name="carpark_info">Carpark Info</string>
 </resources>

@@ -50,19 +50,26 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(43.1, -87.9)));
 
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
-            @Override
-            public void onMapClick(LatLng arg){
-                ((MainActivity) getActivity()).ShowView(getView().findViewById(R.id.toolbar3));
-            }
-        });
+
+
 
         map.addMarker(new MarkerOptions().position(new LatLng(40.1,80.2)).title("Hello"));
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
             @Override
             public boolean onMarkerClick(Marker marker){
+                try{((MainActivity) getActivity()).ShowView(getActivity().findViewById(R.id.bottomToolbar));}
+                catch (NullPointerException e){return false;}
                 return true;
+            }
+        });
+
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+            @Override
+            public void onMapClick(LatLng arg){
+                try{((MainActivity) getActivity()).HideView(getActivity().findViewById(R.id.bottomToolbar));
+                    ((MainActivity) getActivity()).HideView(getActivity().findViewById(R.id.carparkInfo));}
+                catch (NullPointerException e){}
             }
         });
 
